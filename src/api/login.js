@@ -1,5 +1,6 @@
 async function login(data) {
     try {
+        console.log(data)
         let res = await fetch('/api/login', {
             method: 'POST',
             headers: {
@@ -12,7 +13,10 @@ async function login(data) {
         res = await res.json()
         res.statusCode = statusCode
 
-
+        if (statusCode === 200) {
+            localStorage.setItem('sessionId', res.sessionId)
+        }
+        
         return res;
     } catch(err) {
         console.error(err)

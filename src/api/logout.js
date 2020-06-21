@@ -6,7 +6,7 @@ async function logout() {
                  "Authorization": "Bearer " + localStorage.getItem("sessionId")
             }
          })
- 
+         localStorage.removeItem('sessionId')
          const statusCode = res.status
          res = await res.json()
          res.statusCode = statusCode

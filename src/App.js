@@ -1,55 +1,47 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { Route, Switch } from 'react-router-dom'
 
+import Login from 'pages/Login'
+import MeetUp from 'pages/MeetUp'
+import PrivateRoute from 'components/PrivateRoute'
 import checkSession from 'api/checkSession'
-import login from 'api/login'
-import logout from 'api/logout'
-
 
 import './App.css';
 
 function App() {
-
+    const [isLoaded, setIsLoaded] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
-            let res = await checkSession()
-            console.log(res)
+            let res
+            try {
+                res = await checkSession()
+            } catch (err) {
+                console.error(err)
+            }
+
             setIsLoggedIn(res.statusCode === 200)
+            setIsLoaded(true)
         }
 
         fetchData()
-        
+
     }, [])
 
     return (
-        isLoggedIn ? (
-            <div> 
-                Logged in!!!!
-                <button onClick={
-                    () => {
-                        logout()
-                    }
-                }>
-                    Log out
-                </button>
-            </div>
-        ) : (
-            <div>
-                Not logged 
-                <button onClick={ () => {
-                        login({
-                            "login": "efimo.tolik@gmail.com",
-                            "password": "575410820u"
-                        })
-                            .then(res => { setIsLoggedIn(res.statusCode === 200); console.log(res); window.localStorage.setItem("sessionId", res.sessionId) })
-                    }
-                }>
-                    log in
-                </button>
-            </div>
+        isLoaded && (
+            <main>
+                <Switch>
+                    <Route path='/login'>
+                        <Login />
+                    </Route>
+                    <PrivateRoute path='/meetup' component={MeetUp}/>
+
+                </Switch>
+            </main>
         )
-        
+
     )
 }
 
