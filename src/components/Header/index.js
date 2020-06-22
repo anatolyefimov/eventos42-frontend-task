@@ -1,11 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import logout from 'api/logout'
+import logout from 'api/logout';
 
-import './Header.css'
+import './Header.css';
 
-function Header({isLoggedIn, setIsLoggedIn}) {
+function Header({ isLoggedIn, setIsLoggedIn }) {
     return (
         <header className='Header'>
             <Link to=''>
@@ -13,10 +13,10 @@ function Header({isLoggedIn, setIsLoggedIn}) {
             </Link>
             {
                 isLoggedIn &&
-                <button className="Header__logout" onClick= { 
+                <button className="Header__logout" onClick= {
                     () => {
                         logout()
-                            .then(() => {setIsLoggedIn(false)})
+                            .then(() => { setIsLoggedIn(false); });
                     }
                 }>
                     <svg className="Header__logout-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation" fill="white">
@@ -25,9 +25,9 @@ function Header({isLoggedIn, setIsLoggedIn}) {
                     </svg>
                 </button>
             }
-            
+
         </header>
-    )
+    );
 }
 
 export default Header;

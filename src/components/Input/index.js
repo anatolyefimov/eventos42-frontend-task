@@ -1,8 +1,8 @@
-import  React from 'react'
+import  React from 'react';
 
-import './Input.css'
+import './Input.css';
 
-function Input({className, ...props}) {
+function Input({ className, ...props }) {
 
     return (
         <input className={'Input ' + className} {...props} />

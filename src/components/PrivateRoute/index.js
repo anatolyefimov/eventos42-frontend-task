@@ -1,21 +1,21 @@
-import React from 'react'
-import { Route, Redirect } from "react-router-dom";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-function PrivateRoute({ children, isAuth, ...rest }) {
+function PrivateRoute({ children, ...rest }) {
     return (
         <Route
             {...rest}
             render={(props) =>
-                localStorage.getItem("sessionId") ? (
+                localStorage.getItem('sessionId') ? (
                     children
                 ) : (
-                        <Redirect
-                            to={{
-                                pathname: "/login",
-                                state: { from: props.location }
-                            }}
-                        />
-                    )
+                    <Redirect
+                        to={{
+                            pathname: '/login',
+                            state: { from: props.location }
+                        }}
+                    />
+                )
             }
         />
     );

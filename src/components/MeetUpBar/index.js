@@ -2,10 +2,10 @@ import React from 'react';
 import { Link , useParams } from 'react-router-dom';
 
 function MeetUpBar() {
-    let {meetUpId} = useParams();
+    let { meetUpId } = useParams();
     return (
         <div>
-        <Link to={`/m/${meetUpId}/visitor`}>
+            <Link to={`/m/${meetUpId}/visitor`}>
                 <button>ПОСЕТИТЕЛИ</button>
             </Link>
             <Link to={`/m/${meetUpId}/settings`}>

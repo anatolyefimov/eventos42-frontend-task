@@ -3,15 +3,15 @@ async function meetUp() {
         let res = await fetch('/api/meetup?showAll=false', {
             method:  'GET',
             headers: {
-                "Authorization": "Bearer " + localStorage.getItem("sessionId")
+                'Authorization': 'Bearer ' + localStorage.getItem('sessionId')
             }
-        })
+        });
 
-        res = await res.json()
-        return res
+        res = await res.json();
+        return res;
 
-    } catch(err) {
-        console.error(err)
+    } catch (err) {
+        console.error(err);
     }
 
 

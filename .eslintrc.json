@@ -15,7 +15,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
+        "ecmaVersion": 11,
         "sourceType": "module"
     },
     "plugins": [
@@ -26,10 +26,6 @@
             "error",
             4
         ],
-        "linebreak-style": [
-            "off",
-            "unix"
-        ],
         "quotes": [
             "error",
             "single"
@@ -37,6 +33,20 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "brace-style": [
+            "error", 
+            "1tbs", 
+            { "allowSingleLine": true }
+        ],
+        "object-curly-spacing": ["error", "always"],
+        "no-trailing-spaces": "error",
+        "block-spacing": "error",
+        "no-var": "error",
+        "keyword-spacing": "error",
+        "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
+        "eol-last": ["error", "always"],
+        "react/prop-types": [0],
+        "react/display-name": [0]
     }
 }

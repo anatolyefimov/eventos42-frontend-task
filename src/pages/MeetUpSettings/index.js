@@ -5,7 +5,7 @@ function MeetUpSettings() {
         <div>
             Настройки
         </div>
-    )
+    );
 }
 
 export default MeetUpSettings;
