@@ -1,4 +1,5 @@
 import React, { useEffect, useState} from 'react'
+import { Link } from 'react-router-dom';
 
 import meetUp from 'api/meetUp';
 
@@ -34,20 +35,24 @@ function MeetUp() {
                 <tbody>
                     {
                         meetUps.map((meetup) => (
-                            <tr className='MeetUp__tr'>
-                                <td className='MeetUp__td'>
-                                    {meetup.name}
-                                </td>
-                                <td className='MeetUp__td'>
-                                    {meetup.startTime}
-                                </td>
-                                <td className='MeetUp__td'>
-                                    {meetup.endTime}
-                                </td>
-                                <td className='MeetUp__td'>
-                                    {meetup.visitorsCount}
-                                </td>
-                            </tr>
+                                <tr className='MeetUp__tr' key={meetup.meetupId}>
+                                    <td className='MeetUp__td'>
+
+                                            <Link style={{ color: 'inherit'}} to={`m/${meetup.meetupId}`}>
+                                                {meetup.name}
+                                            </Link>
+
+                                    </td>
+                                    <td className='MeetUp__td'>
+                                        {meetup.startTime}
+                                    </td>
+                                    <td className='MeetUp__td'>
+                                        {meetup.endTime}
+                                    </td>
+                                    <td className='MeetUp__td'>
+                                        {meetup.visitorsCount}
+                                    </td>
+                                </tr>
                         ))
                     }
                 </tbody>

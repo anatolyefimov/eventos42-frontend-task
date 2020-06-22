@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import Login from 'pages/Login'
 import MeetUp from 'pages/MeetUp'
+import Header from 'components/Header'
 import PrivateRoute from 'components/PrivateRoute'
 import checkSession from 'api/checkSession'
 
@@ -31,15 +32,18 @@ function App() {
 
     return (
         isLoaded && (
-            <main>
-                <Switch>
-                    <Route path='/login'>
-                        <Login />
-                    </Route>
-                    <PrivateRoute path='/meetup' component={MeetUp}/>
+            <>
+                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+                <main>
+                    <Switch>
+                        <Route path='/login'>
+                            <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+                        </Route>
+                        <PrivateRoute path='/meetup' component={MeetUp}/>
 
-                </Switch>
-            </main>
+                    </Switch>
+                </main>
+         </>
         )
 
     )

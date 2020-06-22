@@ -7,7 +7,7 @@ import login from 'api/login';
 
 import './Login.css'
 
-function Login() {
+function Login({ isLoggedIn, setIsLoggedIn }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [success, setSuccess] = useState(false);
@@ -22,8 +22,9 @@ function Login() {
                         password: password
                     })
                         .then((res) => res.statusCode === 200)
-                        .then(isLoggedIn => {
-                            if (isLoggedIn) {
+                        .then(logInStatus => {
+                            setIsLoggedIn(logInStatus)
+                            if (logInStatus) {
                                 setSuccess(true);
                                 setError(false);
                             } else {

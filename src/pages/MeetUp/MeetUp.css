@@ -12,7 +12,11 @@
 }
 
 .MeetUp__thead {
-    background-color: rgb(194, 194, 194);
+    background-color: rgb(230, 230, 230);
+}
+
+.MeetUp__tr:hover {
+    background-color: rgb(199, 199, 199);
 }
 
 .MeetUp__td, 
