@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route, Redirect } from "react-router-dom";
 
-function PrivateRoute({ component: Component, isAuth, ...rest }) {
+function PrivateRoute({ children, isAuth, ...rest }) {
     return (
         <Route
             {...rest}
             render={(props) =>
                 localStorage.getItem("sessionId") ? (
-                    <Component {...props}/>
+                    children
                 ) : (
                         <Redirect
                             to={{

@@ -1,8 +1,8 @@
-.MeetUp {
+.MeetUpsList {
     padding: 10px
 }
 
-.MeetUp__table {
+.MeetUpsList__table {
     width: 80%;
     margin: auto;
     border: 1px solid gray;
@@ -11,31 +11,31 @@
     border-spacing: 0
 }
 
-.MeetUp__thead {
+.MeetUpsList__thead {
     background-color: rgb(230, 230, 230);
 }
 
-.MeetUp__tr:hover {
+.MeetUpsList__tr:hover {
     background-color: rgb(199, 199, 199);
 }
 
-.MeetUp__td, 
-.MeetUp__th {
+.MeetUpsList__td, 
+.MeetUpsList__th {
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
 }
 
-.MeetUp__td:nth-child(n+2) {
+.MeetUpsList__td:nth-child(n+2) {
     width: 200px;
     padding: 10px;
     text-align: center;
     box-sizing: border-box;
 }
 
-tr:last-child MeetUp__td:first-child {
+tr:last-child MeetUpsList__td:first-child {
     border-bottom-left-radius: 10px;
 }
-tr:first-child MeetUp__td:last-child {
+tr:first-child MeetUpsList__td:last-child {
     border-bottom-right-radius: 10px;
 }

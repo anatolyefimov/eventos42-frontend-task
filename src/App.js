@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom'
 
 import Login from 'pages/Login'
-import MeetUp from 'pages/MeetUp'
+import MeetUpsList from 'pages/MeetUpsList'
+import MeetUpSettings from 'pages/MeetUpSettings';
+import MeetUpVisitor from 'pages/MeetUpVisitors';
 import Header from 'components/Header'
 import PrivateRoute from 'components/PrivateRoute'
+import MeetUpBar from 'components/MeetUpBar'
 import checkSession from 'api/checkSession'
 
 import './App.css';
@@ -39,8 +42,18 @@ function App() {
                         <Route path='/login'>
                             <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
                         </Route>
-                        <PrivateRoute path='/meetup' component={MeetUp}/>
-
+                        <PrivateRoute path='/meetup'>
+                            <MeetUpsList />
+                        </PrivateRoute>
+                        <PrivateRoute path='/m/:meetUpId' >
+                            <MeetUpBar />
+                            <PrivateRoute path='/m/:meetUpId/settings' >
+                                <MeetUpSettings />
+                            </PrivateRoute>
+                            <PrivateRoute path='/m/:meetUpId/visitor' >
+                                <MeetUpVisitor />
+                            </PrivateRoute>
+                        </PrivateRoute>
                     </Switch>
                 </main>
          </>

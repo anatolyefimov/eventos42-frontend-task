@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import meetUp from 'api/meetUp';
 
-import './MeetUp.css'
+import './MeetUpsList.css'
 
 function MeetUp() {
     const [meetUps, setMeetUps] = useState([]);
@@ -22,11 +22,11 @@ function MeetUp() {
     }, [])
 
     return (
-        <div className='MeetUp'>
-            <table className='MeetUp__table'>
-                <thead className='MeetUp__thead'>
+        <div className='MeetUpsList'>
+            <table className='MeetUpsList__table'>
+                <thead className='MeetUpsList__thead'>
                     <tr>
-                        <th className='MeetUp__th'>Название меропрития</th>
+                        <th className='MeetUpsList__th'>Название меропрития</th>
                         <th>Дата начала</th>
                         <th>Дата окончания</th>
                         <th>Количетсво пользователей</th>
@@ -35,21 +35,21 @@ function MeetUp() {
                 <tbody>
                     {
                         meetUps.map((meetup) => (
-                                <tr className='MeetUp__tr' key={meetup.meetupId}>
-                                    <td className='MeetUp__td'>
+                                <tr className='MeetUpsList__tr' key={meetup.meetupId}>
+                                    <td className='MeetUpsList__td'>
 
                                             <Link style={{ color: 'inherit'}} to={`m/${meetup.meetupId}`}>
                                                 {meetup.name}
                                             </Link>
 
                                     </td>
-                                    <td className='MeetUp__td'>
+                                    <td className='MeetUpsList__td'>
                                         {meetup.startTime}
                                     </td>
-                                    <td className='MeetUp__td'>
+                                    <td className='MeetUpsList__td'>
                                         {meetup.endTime}
                                     </td>
-                                    <td className='MeetUp__td'>
+                                    <td className='MeetUpsList__td'>
                                         {meetup.visitorsCount}
                                     </td>
                                 </tr>
