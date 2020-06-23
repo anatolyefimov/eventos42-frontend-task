@@ -1,0 +1,33 @@
+.VisitorRegistration {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.VisitorRegistrationForm {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.VisitorRegistrationForm__row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    align-items: center;
+}
+
+.VisitorRegistrationForm__input {
+    width: 70%;
+}
+
+.VisitorRegistrationForm__label {
+    flex-grow: 1;
+}
+
+.VisitorRegistrationForm__submit {
+
+}

@@ -5,6 +5,7 @@ import Login from 'pages/Login';
 import MeetUpsList from 'pages/MeetUpsList';
 import MeetUpSettings from 'pages/MeetUpSettings';
 import MeetUpVisitor from 'pages/MeetUpVisitors';
+import VisitorsRegistration from 'pages/VisitorRegistration';
 import Header from 'components/Header';
 import PrivateRoute from 'components/PrivateRoute';
 import MeetUpBar from 'components/MeetUpBar';
@@ -39,6 +40,9 @@ function App() {
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
                 <main>
                     <Switch>
+                        <Route path='/'>
+                            <VisitorsRegistration />
+                        </Route>
                         <Route path='/login'>
                             <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
                         </Route>
