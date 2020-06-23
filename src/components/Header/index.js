@@ -9,7 +9,7 @@ function Header({ isLoggedIn, setIsLoggedIn }) {
     return (
         <header className='Header'>
             <Link to=''>
-                <img src='https://app.eventos42.ru/images/default/logo--white.svg' />
+                <img src='https://app.eventos42.ru/images/default/logo--white.svg' alt='Логотип'/>
             </Link>
             {
                 isLoggedIn &&

@@ -36,6 +36,5 @@
   },
   "proxy": "https://app.eventos42.ru",
   "devDependencies": {
-    "eslint": "^7.3.0"
   }
 }

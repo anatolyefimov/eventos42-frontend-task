@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import fetchFormData from 'api/fetchFormData';
@@ -6,7 +6,7 @@ import sendVisitorsData from 'api/sendVisitorsData';
 import Button from 'components/Button';
 import Input from 'components/Input';
 
-import './VisitorRegistration.css'
+import './VisitorRegistration.css';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -15,85 +15,124 @@ function useQuery() {
 function VisitorRegistration() {
     const [formData, setFormData] = useState({
         fields: []
-    })
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [formValues, setFormValues] = useState({});
+    });
+
+    const [ isLoaded, setIsLoaded ] = useState(false);
+    const [ success, setSuccess ] = useState(false);
+    const [ formValues, setFormValues ] = useState({});
+    const [ formErrors, setFormErrors ] = useState({});
     let query = useQuery();
 
     const onSubmit = async (e) => {
         e.preventDefault();
-    
-        console.log('submitt...')
+
         let payload = {
             extended: {}
-        }
-        for(let field of formData.fields) {
+        };
+
+        for (let field of formData.fields) {
             if (field.systemField) {
                 payload[field.systemField] = formValues[field.systemField] || '';
             } else {
                 payload.extended[field.name] = formValues[field.name] || '';
             }
         }
+
         try {
             let res = await sendVisitorsData(formData.token, payload);
-        } catch(err) {
+            if (!res.error) {
+                setSuccess(true);
+                setFormErrors({});
+            } else {
+                if (res.errors) {
+                    let errors = res.errors.reduce((acc, error) => {
+                        acc[error.args.field] = error.message;
+                        return acc;
+                    }, {});
+
+                    setFormErrors(errors);
+                } else {
+                    setFormErrors({
+                        [res.args.field]: res.message
+                    });
+                }
+            }
+        } catch (err) {
             console.error(err);
         }
-    }
+
+
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 if (query.get('token')) {
                     let res = await fetchFormData(query.get('token'));
-                    res.fields = res.fields.filter((field) => field.systemField !== 'group')
+                    res.fields = res.fields.filter((field) => field.systemField !== 'group');
 
                     setFormData(res);
-                    
+
                 }
                 setIsLoaded(true);
             } catch (err) {
                 console.error(err);
             }
-        }    
-        
-        fetchData();
-    }, [])
+        };
+
+        fetchData(); // eslint-disable-next-line
+    }, []);
 
     return (
         isLoaded && (
-            <div className='VisitorRegistration'>
-                <form className='VisitorRegistrationForm' onSubmit={onSubmit}> 
-                    {
-                        formData.fields.map((field, index) => {
-                            let name = field.systemField || field.name;
+            !success ? (
+                <div className='VisitorRegistration'>
+                    <form className='VisitorRegistrationForm' onSubmit={onSubmit}>
+                        {
+                            formData.fields.map((field, index) => {
+                                let name = field.systemField || field.name;
 
-                            return (
-                                <div className='VisitorRegistrationForm__row' key={index}>
-                                    <label className='VisitorRegistrationForm__label' htmlFor={name}>{field.label}</label>
-                                    <Input 
-                                        name={name} 
-                                        id={name}
-                                        className='VisitorRegistrationForm__input'
-                                        value={formValues[name]}
-                                        onChange={(e) => {
-                                            e.persist()
-                                            setFormValues(prevValues => ({ ...prevValues, [name]: e.target.value }))
-                                        }}
-                                    /> 
-                                </div>
-                            );
-                        })
-                    }
-                    <Button 
-                        type='submit' 
-                        title='Зарегестрироваться' 
-                        className='VisitorRegistrationForm__submit'
-                    />
-                </form> 
-            </div>
+                                return (
+                                    <>
+                                        <div className='VisitorRegistrationForm__row' key={index}>
+                                            <label className='VisitorRegistrationForm__label' htmlFor={name}>{field.label}</label>
+                                            <Input
+                                                name={name}
+                                                id={name}
+                                                className='VisitorRegistrationForm__input'
+                                                value={formValues[name] || ''}
+                                                onChange={(e) => {
+                                                    e.persist();
+                                                    setFormValues(prevValues => ({ ...prevValues, [name]: e.target.value }));
+                                                }}
+                                            />
+                                        </div>
+                                        { formErrors[name] &&
+                                            <div className='VisitorRegistrationForm__error'>
+                                                {formErrors[name]}
+                                            </div>
+                                        }
+                                    </>
+                                );
+                            })
+                        }
+                        <Button
+                            type='submit'
+                            title='Зарегестрироваться'
+                            className='VisitorRegistrationForm__submit'
+                        />
+                    </form>
+                </div>
+            ) : (
+                <div className='VisitorRegistrationSuccess'>
+                    <div className='VisitorRegistrationSuccess__message'>
+                        <div> Вы успешно зарегистрировались </div>
+                        <Button title='Ещё раз' onClick={() => setSuccess(false)} />
+                    </div>
+                </div>
+            )
         )
-    )
+    );
 }
 
 export default VisitorRegistration;
