@@ -16,12 +16,11 @@ function VisitorRegistration() {
     const [formData, setFormData] = useState({
         fields: []
     });
-
     const [ isLoaded, setIsLoaded ] = useState(false);
     const [ success, setSuccess ] = useState(false);
     const [ formValues, setFormValues ] = useState({});
     const [ formErrors, setFormErrors ] = useState({});
-    let query = useQuery();
+    const token = useQuery().get('token');
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -67,8 +66,8 @@ function VisitorRegistration() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                if (query.get('token')) {
-                    let res = await fetchFormData(query.get('token'));
+                if (token) {
+                    let res = await fetchFormData(token);
                     res.fields = res.fields.filter((field) => field.systemField !== 'group');
 
                     setFormData(res);
@@ -126,7 +125,7 @@ function VisitorRegistration() {
             ) : (
                 <div className='VisitorRegistrationSuccess'>
                     <div className='VisitorRegistrationSuccess__message'>
-                        <div> Вы успешно зарегистрировались </div>
+                        <div style={{ margin: '15px 0px' }}>Вы успешно зарегистрировались </div>
                         <Button title='Ещё раз' onClick={() => setSuccess(false)} />
                     </div>
                 </div>

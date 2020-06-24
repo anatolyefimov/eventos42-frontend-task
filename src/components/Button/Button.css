@@ -3,9 +3,13 @@
     color: white;
     border-radius: 5px;
     font-size: 16px;
-    padding: 6px 16px;
+    padding: 10px 20px;
     border: none;
     box-sizing: border-box;
     cursor: pointer;
     font-family: inherit;
+}
+
+.Button:hover {
+    background-color: #1b2b86;
 }

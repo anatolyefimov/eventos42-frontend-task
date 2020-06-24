@@ -33,8 +33,13 @@
     color: red;
 }
 
+.VisitorRegistrationForm__submit {
+    margin-top: 15px;
+}
+
 .VisitorRegistrationSuccess__message {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column ;
 }
