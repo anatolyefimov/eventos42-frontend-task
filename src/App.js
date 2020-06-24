@@ -40,7 +40,7 @@ function App() {
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
                 <main>
                     <Switch>
-                        <Route path='/'>
+                        <Route exact path='/'>
                             <VisitorsRegistration />
                         </Route>
                         <Route path='/login'>
